@@ -1,0 +1,25 @@
+<%- include("partials/header"); -%>
+
+
+<form class='tag-box' action="/" method="post">
+  <input class='tag-link' type="submit" name='tag' value="Web Development">
+  <input class='tag-link middle' type="submit" name='tag' value="Career Change">
+  <input class='tag-link' type="submit" name='tag' value="Effective Communication">
+</form>
+
+<h3 class='title'>Read about my Goals, Insights & how I tackle Challenges</h3>
+
+<%  posts.forEach(function(post){ %>
+
+<h1><%=post.title%></h1>
+<p><%=post.date%></p>
+<p>
+  <%=post.blogPost.substring(0, 100) + " ..."%>
+  <a href="/posts/<%=post._id%>">Read More</a>
+</p>
+
+
+<% }) %>
+
+
+<%- include("partials/footer"); -%>
