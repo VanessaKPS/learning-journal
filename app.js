@@ -44,13 +44,17 @@ app.get('/', function (req, res) {
 });
 
 app.post('/', (req, res) => {
-  Post.find({ tags: req.body.tag }, (err, foundPosts) => {
-    if (foundPosts) {
-      res.render('home', {
-        posts: foundPosts,
-      });
-    }
-  });
+  if (req.body.tag === 'Show All') {
+    res.redirect('/');
+  } else {
+    Post.find({ tags: req.body.tag }, (err, foundPosts) => {
+      if (foundPosts) {
+        res.render('home', {
+          posts: foundPosts,
+        });
+      }
+    });
+  }
 });
 
 app.get('/about', function (req, res) {
