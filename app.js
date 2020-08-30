@@ -8,8 +8,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-const aboutContent =
-  'Welcome to my Learning Journal! This site was created to share my Goals, Insights, & how I tackle Challenges along my lifelong professional/personal development journey. It will not only keep me accountable but also help crystalise any learning by actively putting them into words. I hope you enjoy reading about how I approach my career transition from being a professional contemporary Dancer, Facilitator and Events Organiser in Diversity & Inclusion, to building a career as a self-starting Web Developer.';
+const aboutContent = `Welcome to my Learning Journal! This site was created to share my Goals, Insights, & how I tackle Challenges along my lifelong professional/personal development journey. I hope you enjoy reading about how I approach my career transition from being a professional contemporary Dancer, Facilitator and Events Organiser in Diversity & Inclusion, to building a career as a self-starting Web Developer.`;
 
 mongoose.connect(
   'mongodb+srv://admin-vk:test123@cluster0-lzbfn.mongodb.net/blogDB',
@@ -92,8 +91,8 @@ app.post('/compose', function (req, res) {
 
   const now = new Date();
   const year = now.getFullYear();
-  let month = now.getMonth();
-  let day = now.getDay();
+  let month = now.getMonth() + 1;
+  let day = now.getDate();
 
   if (month < 10) {
     month = `0${month}`;
