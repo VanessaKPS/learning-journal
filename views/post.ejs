@@ -1,7 +1,10 @@
 <%- include("partials/header"); -%>
-
+<img class="header-img" src="<%=headerImg%>" alt="<%=title%>" />
 <h1><%=title%></h1>
 <h4><%=date%></h4>
-<p><%=content%></p>
-
+<div class="body">
+  <%content.map(p => { %>
+  <p class="paragraph"><%=p%></p>
+  <%})%>
+</div>
 <%- include("partials/footer"); -%>

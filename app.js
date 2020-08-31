@@ -26,6 +26,7 @@ app.use(express.static('public'));
 const blogSchema = new mongoose.Schema({
   title: String,
   blogPost: String,
+  headerImg: String,
   tags: [String],
   date: String,
 });
@@ -76,7 +77,14 @@ app.post('/login', (req, res) => {
   }
 });
 app.post('/compose', function (req, res) {
-  const { webDev, career, communication, postTitle, postBody } = req.body;
+  const {
+    webDev,
+    career,
+    communication,
+    postTitle,
+    postBody,
+    headerImgURL,
+  } = req.body;
   const activeTags = [];
 
   if (webDev === 'on') {
@@ -103,6 +111,7 @@ app.post('/compose', function (req, res) {
 
   const post = new Post({
     title: postTitle,
+    headerImg: headerImgURL,
     blogPost: postBody,
     date: `${day}/${month}/${year}`,
     tags: activeTags,
@@ -119,9 +128,12 @@ app.get('/posts/:postName', function (req, res) {
   const requestedID = req.params.postName;
   Post.findOne({ _id: requestedID }, (err, identifiedPost) => {
     if (!err) {
+      let splitBody = identifiedPost.blogPost.split('~');
+
       res.render('post', {
         title: identifiedPost.title,
-        content: identifiedPost.blogPost,
+        headerImg: identifiedPost.headerImg,
+        content: splitBody,
         date: identifiedPost.date,
       });
     } else {
